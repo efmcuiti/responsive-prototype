@@ -1,0 +1,342 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>PrestaPolis</title>
+        <link rel="stylesheet" href="css/modal.css" />
+        <link rel="stylesheet" href="css/btnStyles.css" />
+        <link rel="stylesheet" href="css/confirm.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script src="js/modal.js" type="text/javascript"></script>
+        <script src="js/validator.js" type="text/javascript"></script>
+        <script src="js/confirm_manager.js" type="text/javascript"></script>
+        <script src="js/confirm_reactive.js" type="text/javascript"></script>
+    </head>
+
+    <!-- 3. Display the application -->
+    <body>
+        <div class="container">
+  <div class="box header">
+    <div class="hamburguer">
+      &#x2630;
+    </div>
+    <div class="logo">
+      <img src="img/logo-prestapolis-oneline.png" />
+    </div>
+  </div>
+  <div *ngIf="bill" class="box content content--text">
+    <div class="content__header">
+      <div class="title">
+        <h4 class="title--text">Confirmar compra</h4>
+      </div>
+      <div class="button button--boxed button--boxed__dark">
+        <img src="img/iconset/right-arrow.svg" class="img--icon" />
+      </div>
+    </div>
+    <div class="content__data content--text">
+      <div class="content__header">
+        <div class="title">
+          <h4 class="title--text">Detalles de la compra</h4>
+        </div>
+      </div>
+      <div class="content--detail">
+        <div class="content--detail__label text--light">
+          Factura
+        </div>
+        <div class="content--detail__data">
+          {{bill.billNumber}}
+        </div>
+        <div class="content--detail__label text--light">
+          Producto
+        </div>
+        <div class="content--detail__data">
+          {{bill.item}}
+        </div>
+        <div class="content--detail__label text--light">
+          Total
+        </div>
+        <div class="content--detail__data">
+          {{bill.billAmount}}
+        </div>
+        <div class="content--detail__expand-center button">
+          <a href="#" class="text--dashed js-show-more__link">Ver m&aacute;s</a>
+        </div>
+        <div class="content--detail__expand-center js-show-more__content">
+          <div class="content--detail__label text--light">
+            Descripci&oacute;n
+          </div>
+          <div class="content--detail__data">
+            {{bill.description}}
+          </div>
+          <div class="content--detail__label text--light">
+            I. V. A.
+          </div>
+          <div class="content--detail__data">
+            {{bill.iva}}
+          </div>
+        </div>
+      </div>
+
+      <!-- BEGIN: PersoData section. -->
+      <div class="content__header">
+        <div class="title">
+          <h4 class="title--text">Datos personales</h4>
+        </div>
+        <div class="button button--boxed button--boxed__light button--boxed__light--border js-edit" id="js-perso-data">
+          <img src="img/iconset/edit.svg" class="img--icon" />
+        </div>
+      </div>
+      <div class="content--detail">
+        <div class="content--detail__expand-center">
+          {{bill.persoData.firstName}} {{bill.persoData.middleName}} {{bill.persoData.lastName}} {{bill.persoData.otherNames}}
+        </div>
+        <div class="content--detail__label text--light">
+          {{bill.persoData.idType}}
+        </div>
+        <div class="content--detail__data">
+          {{bill.persoData.idNumber}}
+        </div>
+        <div class="content--detail__expand-center button">
+          <a href="#" class="text--dashed js-show-more__link">Ver m&aacute;s</a>
+        </div>
+        <div class="content--detail__expand-center js-show-more__content">
+          <div class="content--detail__label text--light">
+            Fecha de nacimiento
+          </div>
+          <div class="content--detail__data">
+            {{bill.persoData.birthdate}}
+          </div>
+          <div class="content--detail__label text--light">
+            Celular
+          </div>
+          <div class="content--detail__data">
+            {{bill.persoData.contacts[0].mobilePhone}}
+          </div>
+          <div class="content--detail__label text--light">
+            E-mail
+          </div>
+          <div class="content--detail__data">
+            {{bill.persoData.contacts[0].email}}
+          </div>
+          <div class="content--detail__label text--light">
+            Direcci&oacute;n
+          </div>
+          <div class="content--detail__data">
+            {{bill.persoData.contacts[0].address}}
+          </div>
+        </div>
+      </div>
+      <!-- END: PersoData section. -->
+
+      <!-- BEGIN: CC section. -->
+      <div class="content__header">
+        <div class="title">
+          <h4 class="title--text">Medio de pago</h4>
+        </div>
+        <div class="button button--boxed button--boxed__light button--boxed__light--border js-edit" id="js-cc">
+          <img src="img/iconset/edit.svg" class="img--icon" />
+        </div>
+      </div>
+      <div class="content--detail">
+
+        <div class="content--detail__expand-center">
+          {{cards[0].number}} <img src="img/iconset/visa.svg" class="img--thumbnail" />
+        </div>
+        <div class="content--detail__label text--light">
+          Expira
+        </div>
+        <div class="content--detail__data">
+          {{cards[0].expiresOn}}
+        </div>
+      </div>
+    </div>
+    <!-- END: CC section. -->
+  </div>
+</div>
+
+<div class="box footer">
+  PrestaPolis - Financia tus compras sin costos adicionales <br />
+  &copy; 2016 Derechos reservados
+</div>
+
+<!-- BEGIN: Forms modals. -->
+<!-- BEGIN: Persodata form. -->
+<div id="js-perso-data-modal" class="modal">
+  <div class="modal-content">
+    <div class="box">
+      <div class="content__header">
+        <div class="title">
+          <h4 class="title--text">Datos personales</h4>
+        </div>
+        <div class="button button--boxed button--boxed__dark js-modal-close">
+          &times;
+        </div>
+      </div>
+      <div *ngIf="bill">
+        <div class="content--detail">
+          <div class="content--detail__label text--light">
+            <label for="persodata-idNumber">C&eacute;dula</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="number" id="persodata-idNumber" placeholder="S&oacute;lo n&uacute;meros" class="modal-input" tabindex="10" [(ngModel)]="bill.persoData.idNumber" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="persodata-name">Nombre</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="text" id="persodata-name" placeholder="Nombre completo" class="modal-input" tabindex="11" [(ngModel)]="bill.persoData.firstName" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="persodata-birthdate">Fecha de nacimiento</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="date" id="persodata-birthdate" class="modal-input" tabindex="12" [(ngModel)]="bill.persoData.birthdate" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="persodata-phone">Celular</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="number" id="persodata-phone" class="modal-input" placeholder="S&oacute;lo n&uacute;meros" tabindex="13" [(ngModel)]="bill.persoData.contacts[0].mobilePhone" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="persodata-email">Email</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="email" id="persodata-email" class="modal-input" tabindex="14" [(ngModel)]="bill.persoData.contacts[0].email" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="persodata-address">Direcci&oacute;n</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="text" id="persodata-address" placeholder="Direcci&oacute;n de correspondencia" class="modal-input" tabindex="15" bill.persoData.contacts[0].address />
+          </div>
+          <div class="content--detail__expand-center">
+            &nbsp;
+          </div>
+          <div class="content--detail__expand-center button button--boxed button--boxed__dark" id="js-modal-save">
+            Guardar
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END: Persodata form. -->
+
+<!-- BEGIN: CC form. -->
+<div id="js-cc-modal" class="modal">
+  <div class="modal-content">
+    <div class="box">
+      <div class="content__header">
+        <div class="title">
+          <h4 class="title--text">Tarjeta de Cr&eacute;dito</h4>
+        </div>
+        <div class="button button--boxed button--boxed__dark js-modal-close">
+          &times;
+        </div>
+      </div>
+      <div *ngIf="bill">
+        <div class="content--detail">
+          <div class="content--detail__label text--light">
+            <label for="cc-dues">Cuotas</label>
+          </div>
+          <div class="content--detail__data">
+            <input id="cc-dues" placeholder="Ingrese las cuotas" type="number" class="modal-input" tabindex="20" min="3" [(ngModel)]="dues" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="cc-number">N&uacute;mero</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="number" id="cc-number" placeholder="S&oacute;lo n&uacute;meros" class="modal-input" tabindex="21" [(ngModel)]="cards[0].number" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="cc-cvc">CVC</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="number" id="cc-cvc" class="modal-input" placeholder="***" tabindex="22" [(ngModel)]="cards[0].cvc" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="cc-expDate">Expira en</label>
+          </div>
+          <div class="content--detail__data">
+            <input type="month" id="cc-expDate" class="modal-input" tabindex="23" [(ngModel)]="cards[0].expiresOn" />
+          </div>
+          <div class="content--detail__label text--light">
+            <label for="cc-bank">Banco</label>
+          </div>
+          <div class="content--detail__data">
+            <select [(ngModel)]="cards[0].bankId"
+                    class="formInput" id="cc-bank" tabindex="24">
+              <option value="0">-- Seleccione un Banco --</option>
+              <option *ngFor="let bank of banks" value="{{bank.id}}">{{bank.nombre}}</option>
+            </select>
+          </div>
+          <div class="content--detail__expand-center">
+            &nbsp;
+          </div>
+          <div class="content--detail__expand-center button button--boxed button--boxed__dark" id="js-modal-save">
+            Guardar
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END: CC form. -->
+
+<!-- END: Forms modals. -->
+
+<div class="navButtonsContainer">
+  <div id="backButton" class="navBackBtn">
+    <span class="back">&#60;</span><br />
+    <small>
+      Paso <strong id="prevStep">X</strong>
+    </small>
+  </div>
+  <div class="submitContainer">
+    <button id="sendForm" class="submitButton" (click)="confirm(true)" tabindex="50">Confirmar</button>
+    <button id="rejectButton" class="submitButton" (click)="confirm(false)" tabindex="51">Rechazar</button>
+  </div>
+  <div id="nextButton" class="navNextBtn">
+    <span class="back">&#62;</span><br />
+    <small>
+      Paso <strong id="nextStep">Y</strong>
+    </small>
+  </div>
+</div>
+
+<div id="msgModal" class="modal">
+  <div class="modal-content">
+    <span id="modalCloseBtn" class="close">&times;</span>
+    <div *ngIf="message">
+      <div *ngIf="message.success">
+        <h2 class="text-success">¡Proceso correcto!</h2>
+        <p>
+          Notifica al vendedor y reclama tu producto si confirmaste la compra.
+        </p>
+        <p>
+          Si rechazaste la compra, no debes hacer nada m&aacute;s.
+        </p>
+      </div>
+      <div *ngIf="!message.success">
+        <h2 *ngIf="message.fields">Lo sentimos, se presentaron inconvenientes al confirmar la compra</h2>
+      </div>
+      <small class="text-danger" *ngIf="!message.success">
+        <p>
+          Detalle de errores:
+        </p>
+        <ul *ngIf="message.fields">
+          <li *ngFor="let field of message.fields" style="list-style-type: none">
+            <strong>Campo:</strong> {{field.fieldName}}
+            <strong>Error: </strong> {{field.errorMessage}}
+          </li>
+        </ul>
+      </small>
+    </div>
+  </div>
+</div>
+    </body>
+
+</html>

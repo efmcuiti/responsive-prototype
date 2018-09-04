@@ -1,0 +1,210 @@
+body,html {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Verdana';
+    font-weight: normal;
+    box-sizing: border-box;
+    background-color: #f6f6f6;
+}
+
+div#upperHolder {
+  padding: 1% 0 1% 0;
+  background-color: #fff;
+  border-bottom: solid 1px #ccc;
+}
+
+div.navBar {
+    text-align: right;
+    padding: 7px;
+    font-size: 8pt;
+    float: right;
+}
+
+div.navBar a:link {
+    color: #fff;
+    padding: 2px;
+}
+
+div.navBar a:hover {
+    background-color: #ff6427;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.navBarElement {
+    margin-right: 5px;
+}
+
+div.header {
+    padding-top: 10px;
+    padding-left: 5px;
+    text-align: left;
+    display: inline-block;
+}
+
+ul.headerLinks {
+    display: inline-block;
+    vertical-align: top;
+}
+
+ul.headerLinks li {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+a.header:link {
+    text-decoration: none;
+    color: #fff;
+    background-color: #ff6427;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+a.selected {
+    text-decoration: none;
+    color: #fff;
+    background-color: #0b699e;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+a.header:hover {
+    background-color: #0b699e;
+}
+
+
+/* Content styling. */
+.sectionContainer {
+  padding: 1%;
+  color: #666;
+}
+div#content {
+    padding-bottom: 22px;
+}
+
+div.formContainer {
+    width: 60%;
+    margin: 24px auto 0px auto!important;
+    background-color: #fff;
+    padding: 1%;
+    box-shadow: 1px 1px 1px #ccc;
+}
+
+div#footer {
+    text-align: center;
+    background-color: #0b699e;
+    color: #fff;
+    padding: 7px;
+    font-size: 8pt;
+}
+
+div#footer a:link {
+    color: #fff;
+    padding: 2px;
+}
+
+.footerElement {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.mandatory {
+    color: red;
+    font-weight: bold;
+    vertical-align: super;
+}
+
+.title {
+    color: #ff6427;
+    background-color: #fff;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 10pt;
+    text-align: left;
+    font-family: "Helvetica";
+    box-shadow: 1px 1px 1px #ff6427;
+}
+
+.title span {
+    font-size: 16pt;
+    margin-bottom: 4pt;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #0b699e;
+    padding-left: 10px;
+    font-size: 10pt;
+    text-align: right;
+    font-family: "Helvetica";
+    border-bottom: #0b699e solid 1px;
+    border-bottom-style: dotted;
+}
+
+.subtitle span {
+    font-size: 12pt;
+    margin-bottom: 4pt;
+    font-weight: bold;
+}
+
+.label {
+    display: block;
+    padding-left: 2px;
+    padding-bottom: 2px;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 19px;
+    color: #666;
+    font-family: Arial,sans-serif;
+}
+
+.formInput {
+    height: 31px;
+    padding: 3px 7px;
+    line-height: normal;
+    font-size: 100%;
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.07) inset;
+}
+
+.submitButton {
+    font-size: 12pt;
+    background-color: #ff6427;
+    color: #fff;
+    padding: 5px 20px 5px 20px;
+    text-decoration: none;
+    font-family: "Arial";
+    border-radius: 10px;
+}
+
+.submitButton:hover {
+    background-color: #0b699e;
+}
+
+.submitContainer {
+    margin-top: 10px;
+    float: right;
+}
+
+/** Font's definition. */
+@font-face {
+    font-family: 'Helvetica';
+    src: url('../fonts/Helvetica/Helvetica.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('../fonts/Helvetica/HelveticaBold.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('../fonts/Helvetica/HelveticaLight.ttf');
+    font-weight: lighter;
+}
